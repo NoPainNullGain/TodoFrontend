@@ -4,7 +4,7 @@ import axios, {
     Axios
 } from "../../node_modules/axios/index";
 
-interface ITodo {
+class Todo {
     id: number;
     todoName: string;
     isComplete: boolean
@@ -17,7 +17,7 @@ var SetComplete_Endpoint = 'https://michaeltodoapi.azurewebsites.net/api/Todo/Se
 var CreateTodo_Endpoint = 'https://michaeltodoapi.azurewebsites.net/api/Todo/CreateTodo'
 
 // Local Todo Storage List
-let TodoList: ITodo[] = [];
+let TodoList: Todo[] = [];
 
 
 // Initialize & run when DOM is ready
@@ -38,13 +38,17 @@ function CreateTodo(input: string | number | string[]){
         alert("You must write something!");
     } 
     else{
-        
-        axios.post<ITodo>(CreateTodo_Endpoint, { id: 0, todoName: input, isComplete: false })
+
+        var todo = new Todo
+        todo.todoName = input.toString();
+
+        axios.post<Todo>(CreateTodo_Endpoint, todo)
         .then(function(response){
 
-            console.log('Todo Created Successfully')
-            GetAllTodos();
-            document.getElementById('input').value = ''
+            //GetAllTodos(); 
+            AddTodoToList(todo);
+            console.log('Todo Created Successfully');
+            (<HTMLInputElement>document.getElementById('input')).value = '';
 
         }).catch(function(response){
             
@@ -55,7 +59,7 @@ function CreateTodo(input: string | number | string[]){
 
 function SetTodoComplete(todoId:Number){
     
-    var todo: ITodo;
+    var todo: Todo;
     
     TodoList.forEach( result => {
         if(result.id == todoId)
@@ -65,7 +69,8 @@ function SetTodoComplete(todoId:Number){
     axios.put(SetComplete_Endpoint, todo).then((result) => {
         
         console.log("axios Updated Todo with Id: " + todo.id + " to " + !todo.isComplete)
-        GetAllTodos();
+        SetCompleteInTodoToList(todo);
+        //GetAllTodos();
     })
 
 }
@@ -75,8 +80,8 @@ function GetAllTodos(){
     $('ul').empty();
     TodoList = []
     
-    axios.get<ITodo[]>(GetAllTodos_Endpoint).then((result)=>{
-        //console.log(result);
+    axios.get<Todo[]>(GetAllTodos_Endpoint).then((result)=>{
+        console.log(result.data);
 
         result.data.forEach(element => {
 
@@ -118,6 +123,37 @@ function FilterGlobalListId(){
     drawTodoList();
 }
 
+function AddTodoToList(todo: Todo){
+    
+    var lastIdInList: number;
+    todo.id = lastIdInList = TodoList[TodoList.length - 1].id + 1;
+    //console.log(lastIdInList)
+
+    TodoList.push(todo)
+
+    drawTodoList();
+}
+
+function SetCompleteInTodoToList(todo: Todo){
+    
+    var lastIdInList: number;
+    todo.id = lastIdInList = TodoList[TodoList.length - 1].id + 1;
+    
+    var objIndex = TodoList.findIndex(((obj:Todo) => obj.id == todo.id));
+
+    if(todo.isComplete){
+        
+        TodoList[objIndex].isComplete = false;
+    }
+    else{
+
+        TodoList[objIndex].isComplete = true;
+    }
+
+    drawTodoList();
+}
+
+// Event Listeners
 function EventListeners(){
    
     // Inputfield event listner
