@@ -1,3 +1,5 @@
+![image](https://user-images.githubusercontent.com/5794831/144872753-db9645fa-0be8-4a42-beaa-b4a48a96f2d9.png)
+
 # Webpack - TypeScript - SCSS
 this project is a beginner-friendly introduction to Webpack, Type Script and SCSS.
 This includes a simple webpack configuration including TypeScript and SCSS transporation
