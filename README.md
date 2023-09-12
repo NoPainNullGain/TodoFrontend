@@ -1,6 +1,6 @@
 ![image](https://user-images.githubusercontent.com/5794831/144872869-dc86580b-1c68-4635-bd13-3b7af04c0ca8.png)
 
-#TODO App 
+## TODO App 
 This is the frontend implementation of the TodoAPI - This was a code test for a job interview and was done in a couple of hours
 https://github.com/NoPainNullGain/TodoApi
 
