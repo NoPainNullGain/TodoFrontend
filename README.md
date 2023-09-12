@@ -36,6 +36,3 @@ When your project is ready for deployment you should use webpack in production m
 npm run webpack:prod
 ```
 That will minify your code and make is production ready
-
-### Author
-Ebbe Vang
