@@ -1,8 +1,9 @@
 ![image](https://user-images.githubusercontent.com/5794831/144872869-dc86580b-1c68-4635-bd13-3b7af04c0ca8.png)
 
-# Todo Frontend Implementation 
-This is the frontend implementation of the TodoAPI - This was a code test for a job interview and was done in a couple of hours
-https://github.com/NoPainNullGain/TodoApi
+# Todo Frontend Implementation
+Code test for a job interview and was done in a couple of hours
+
+This is the frontend implementation of the TodoAPI https://github.com/NoPainNullGain/TodoApi
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
